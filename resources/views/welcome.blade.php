@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,7 +5,7 @@ HTML
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hervina Collections</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
   <style>
@@ -186,6 +185,7 @@ HTML
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
       gap:25px;
+      width: 100%;
     }
 
     .feature-card{
@@ -211,6 +211,7 @@ HTML
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:35px;
+      width: 100%;
     }
 
     .product-card{
@@ -235,6 +236,7 @@ HTML
       border-radius:30px;
       font-size:13px;
       font-weight:600;
+      z-index: 10;
     }
 
     .product-content{ padding:28px; text-align:center; }
@@ -253,6 +255,7 @@ HTML
       box-shadow:0 12px 35px rgba(0,0,0,0.06);
       max-width: 1000px;
       margin: 0 auto 40px;
+      width: 100%;
     }
 
     .contact-image{ 
@@ -315,6 +318,7 @@ HTML
       max-width: 1000px;
       margin: 0 auto;
       box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+      width: 100%;
     }
 
     .map-container {
@@ -339,20 +343,141 @@ HTML
     footer{ padding:40px 8%; background:#f5e3d8; text-align:center; margin-top: 60px; }
     footer p{ color:#7d6257; }
 
-    @media(max-width:900px){
-      .navbar{ flex-direction:column; gap:15px; }
-      .hero{ flex-direction:column; text-align:center; }
-      .hero-text h1{ font-size:48px; }
-      .buttons{ justify-content:center; }
-      .hero-image img{ width:300px; }
-      .blob{ width:320px; height:320px; }
-      .contact-box{ flex-direction:column; padding: 20px; }
-      .contact-image{ max-width: 100%; padding: 10px; }
-      .contact-image img { height: 350px; }
-      .contact-form{ padding: 25px 15px; }
-      .map-outer-box { padding: 20px; border-radius: 30px; }
-      .map-container { height: 250px; border-radius: 18px; }
-      .title{ font-size:40px; }
+    /* ==========================================================================
+       SUPER RESPONSIVE FIX: UNTUK LAYAR HP & TABLET (MAX-WIDTH: 768px)
+       ========================================================================== */
+    @media(max-width: 768px){
+      body {
+        padding: 0;
+      }
+      
+      section {
+        padding: 100px 5% 60px 5%;
+        min-height: auto;
+      }
+
+      /* NAVBAR MOBILE FIX */
+      .navbar {
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      .logo {
+        font-size: 24px;
+      }
+      .menu {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .menu a {
+        margin-left: 0;
+        font-size: 14px;
+      }
+
+      /* HERO MOBILE FIX */
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+      }
+      .hero-text h1 {
+        font-size: 38px;
+        line-height: 1.2;
+      }
+      .hero-text p {
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .buttons {
+        justify-content: center;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 14px;
+        width: 100%; /* Tombol memanjang penuh di HP biar gampang diklik */
+      }
+      .hero-image img {
+        width: 100%;
+        max-width: 280px;
+      }
+      .blob {
+        width: 300px;
+        height: 300px;
+        top: -10px;
+        left: -10px;
+      }
+
+      /* FEATURES & PRODUCTS GRID MOBILE */
+      .features {
+        grid-template-columns: 1fr; /* Jadi 1 kolom vertikal ke bawah di HP */
+        margin-top: 50px;
+      }
+      .products {
+        grid-template-columns: 1fr; /* Produk jilbab berjejer 1-1 ke bawah dengan rapi */
+        gap: 25px;
+      }
+      .product-card img {
+        height: 300px; /* Menyesuaikan tinggi gambar di HP */
+      }
+
+      /* TITLE FIX */
+      .title {
+        font-size: 32px;
+      }
+      .subtitle {
+        font-size: 14px;
+        margin-bottom: 40px;
+      }
+
+      /* CONTACT BOX MOBILE FIX */
+      .contact-box {
+        flex-direction: column;
+        border-radius: 25px;
+      }
+      .contact-image {
+        max-width: 100%;
+        width: 100%;
+        padding: 15px 15px 0 15px;
+      }
+      .contact-image img {
+        height: 280px;
+        border-radius: 18px;
+      }
+      .contact-form {
+        padding: 30px 20px;
+        width: 100%;
+      }
+      .contact-form h2 {
+        font-size: 30px;
+        text-align: center;
+      }
+      .contact-form p {
+        font-size: 14px;
+        text-align: center;
+      }
+
+      /* MAPS & STORE INFO MOBILE FIX */
+      .map-outer-box {
+        padding: 15px;
+        border-radius: 25px;
+      }
+      .map-container {
+        height: 220px;
+        border-radius: 15px;
+      }
+      .store-info {
+        padding: 15px;
+        border-radius: 15px;
+      }
+      .store-info h3 {
+        font-size: 16px;
+      }
+      .store-info p {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -423,7 +548,7 @@ HTML
           </div>
         </div>
       @empty
-        <div class="col-md-12 text-center" style="grid-column: 1 / -1; padding: 40px;">
+        <div style="grid-column: 1 / -1; padding: 40px; text-align: center;">
             <p style="color: #7d6257; font-style: italic;">Koleksi produk sedang diperbarui, nantikan ya! ✨</p>
         </div>
       @endforelse
@@ -455,18 +580,20 @@ HTML
       </div>
     </div>
 
-    <div class="map-container">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.5471490947707!2d107.91572917589255!3d-6.824838666755403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68d124806a0669%3A0x63cd2d5867cd130!2sJl.%20Arief%20Rahman%20Hakim%20No.59%2C%20Situ%2C%20Kec.%20Sumedang%20Utara%2C%20Kabupaten%20Sumedang%2C%20Jawa%20Barat%2045323!5e0!3m2!1sid!2sid!4v1718200000000!5m2!1sid!2sid" 
-    allowfullscreen="" 
-    loading="lazy" 
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
+    <div class="map-outer-box">
+      <div class="map-container">
+        <iframe 
+          src="https://maps.google.com/maps?q=JL%20Arief%20Rakhman%20Hakim%20No.%2059%20Sumedang&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
 
       <div class="store-info">
-        <h3>📍 Store Location</h3>
-        <p>Hervina Collections — JL Arief Rakhman Hakim No. 59 Sumedang, Kecamatan Sumedang Utara, Kabupaten Sumedang, Jawa Barat<p>
+          <h3>📍 Store Location</h3>
+          <p>Hervina Collections — JL Arief Rakhman Hakim No. 59 Sumedang, Kecamatan Sumedang Utara, Kabupaten Sumedang, Jawa Barat</p>
+      </div>
     </div>
   </section>
 
@@ -488,7 +615,6 @@ HTML
       const address = document.getElementById('cust-address').value;
       const message = document.getElementById('message-box').value;
       
-      // JANGAN LUPA: Ganti nomor di bawah ini dengan nomor WA tokomu sendiri!
       const adminWhatsAppNumber = "6281325463214"; 
       
       const textOutput = `Nama Pembeli: ${name}\nWA: ${phone}\nEmail: ${email}\nAlamat Kirim: ${address}\n\nPesan/Orderan:\n${message}`;
