@@ -77,6 +77,7 @@
     .table-responsive {
       width: 100%;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
@@ -92,6 +93,7 @@
       padding: 18px;
       font-weight: 600;
       border-bottom: 2px solid #f0ddd2;
+      white-space: nowrap;
     }
 
     td {
@@ -116,6 +118,7 @@
     .actions {
       display: flex;
       gap: 15px;
+      flex-wrap: wrap;
     }
 
     .action-link {
@@ -155,7 +158,7 @@
       font-size: 15px;
     }
 
-    /* FIX PAGINATION: Memaksa tanda panah raksasa Laravel menjadi kecil & rapi */
+    /* FIX PAGINATION */
     .pagination-wrapper {
       margin-top: 30px;
       display: flex;
@@ -182,13 +185,11 @@
       gap: 5px;
     }
 
-    /* Style untuk text info "Showing X to Y" */
     .pagination-wrapper p {
       font-size: 14px;
       color: #7d6257;
     }
 
-    /* Style untuk kotak tombol angka */
     .pagination-wrapper span, 
     .pagination-wrapper a {
       padding: 8px 16px;
@@ -210,6 +211,44 @@
       background: #d8a892 !important;
       color: white !important;
       border-color: #d8a892 !important;
+    }
+
+    /* KODE BARU: RESPONSIVE UNTUK LAYAR HP (MAX-WIDTH: 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 4%;
+      }
+
+      .crud-container {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .crud-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .crud-header h2 {
+        font-size: 24px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+
+      .actions {
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .pagination-wrapper nav {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -254,11 +293,11 @@
               <td>
                 <img src="{{ $jilbab->image }}" alt="{{ $jilbab->title }}" class="product-img">
               </td>
-              <td style="font-weight: 600; color: #5f4335;">{{ $jilbab->title }}</td>
+              <td style="font-weight: 600; color: #5f4335; white-space: nowrap;">{{ $jilbab->title }}</td>
               <td>{{ Str::limit($jilbab->description, 50) }}</td>
-              <td style="font-weight: 600; color: #d8a892;">Rp {{ number_format($jilbab->price, 0, ',', '.') }}</td>
+              <td style="font-weight: 600; color: #d8a892; white-space: nowrap;">Rp {{ number_format($jilbab->price, 0, ',', '.') }}</td>
               <td>
-                <span style="background: #f6e3d8; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #9a7561;">
+                <span style="background: #f6e3d8; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #9a7561; white-space: nowrap;">
                   {{ $jilbab->stock }} pcs
                 </span>
               </td>
