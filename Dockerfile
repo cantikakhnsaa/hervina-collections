@@ -1,42 +1,26 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm-alpine
 
-# Install sistem dependensi
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+# Install system dependencies & PHP extensions
+RUN apk add --no-cache nginx supervisor curl libpng-dev libxml2-dev zip unzip git \
+    && docker-php-ext-install pdo_mysql bcmath
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Set working directory
+# Setup document root
 WORKDIR /var/www/html
 
-# Copy proyek
+# Copy code
 COPY . .
 
-# Install composer dependensi
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Ubah konfigurasi Apache untuk mengarah ke /public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
+# Nginx & Supervisor Config
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/supervisord.conf /etc/supervisord.conf
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Beri izin akses ke storage
+# Permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 8
+EXPOSE 80
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
